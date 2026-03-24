@@ -33,14 +33,31 @@ h2 {
 
 /* Контейнер всего сайта изначально прозрачный */
 #main-wrapper {
-  opacity: 0;
+ 
   transition: opacity 1s ease;
 }
 
-/* Класс, который мы добавим через JS, когда всё загрузится */
-.site-ready #main-wrapper {
-  opacity: 1;
+/* Первый слайд и логотип видны ВСЕГДА и сразу */
+#slide-1, .logo-box {
+    opacity: 1 !important;
+    visibility: visible !important;
+    z-index: 100;
 }
+
+/* Скрываем только нижние шторки, чтобы они не просвечивали при загрузке */
+.slide:not(#slide-1) {
+    opacity: 0;
+    transform: translate3d(0, 100vh, 0);
+    transition: opacity 0.5s ease; /* Плавное появление позже */
+}
+
+/* Когда JS проснулся — разрешаем нижним шторкам проявляться */
+.site-ready .slide:not(#slide-1) {
+    opacity: 1;
+}
+
+/* УДАЛИ opacity: 0 у всего main-wrapper или body, если добавлял! */
+
 
 .slider {
   position: relative;
@@ -54,11 +71,7 @@ h2 {
   overflow: hidden;
 }
 
-/* Все слайды, кроме первого, по умолчанию сдвинуты вниз или скрыты */
-.slide:not(#slide-1) {
-  transform: translate3d(0, 100vh, 0); /* Убираем их за край экрана */
-  will-change: transform;
-}
+
 
 #slide-1 {
   position: fixed;
