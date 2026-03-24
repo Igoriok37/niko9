@@ -683,10 +683,14 @@ const newsSwiper = new Swiper('.news-container', {
       });
 
 // В САМОМ КОНЦЕ ФАЙЛА:
-window.addEventListener('load', () => {
-  // Теперь функция точно определена
-  if (typeof updateLogoAnimation === 'function') {
-      updateLogoAnimation(); 
-      document.body.classList.add('site-ready');
-  }
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Запускаем цикл анимации сразу
+    if (typeof updateLogoAnimation === 'function') {
+        updateLogoAnimation();
+    }
+    
+    // 2. Проявляем сайт мгновенно (или через крошечную паузу в 100мс)
+    setTimeout(() => {
+        document.body.classList.add('site-ready');
+    }, 100);
 });
