@@ -38,7 +38,7 @@ h2 {
 }
 
 /* Первый слайд и логотип видны ВСЕГДА и сразу */
-#slide-1, .logo-box {
+#slide-1 {
     opacity: 1 !important;
     visibility: visible !important;
     z-index: 100;
